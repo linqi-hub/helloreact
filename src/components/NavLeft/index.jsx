@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import style from './index.less'
 import { Menu } from 'antd'
 import MenuConfig from './../../config/menuConfig'
+import { NavLink } from 'react-router-dom'
 
 const SubMenu = Menu.SubMenu
 
@@ -23,7 +24,7 @@ export default class index extends Component {
       }
       return (
         <Menu.Item title={item.title} key={item.key}>
-          {item.title}
+          <NavLink to={'/admin' + item.key}>{item.title}</NavLink>
         </Menu.Item>
       )
     })

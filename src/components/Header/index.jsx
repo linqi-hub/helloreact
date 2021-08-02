@@ -30,7 +30,7 @@ export default class index extends Component {
           city,
       })
       .then((res) => {
-        if (res.status == 1) {
+        if (res.status === 1) {
           let data = res.lives[0]
           this.setState({
             weather: data.weather,
