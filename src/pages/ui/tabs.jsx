@@ -1,84 +1,119 @@
 import React from 'react'
-import { Card, Button, Tabs, message, Icon } from 'antd'
+import { Card, Tabs, message, Icon } from 'antd'
 import style from './ui.less'
-const TabPane = Tabs.TabPane;
+const TabPane = Tabs.TabPane
 export default class Buttons extends React.Component {
-
-  newTabIndex = 0;
+  newTabIndex = 0
   handleCallback = (key) => {
-    message.info("Hi,您选择了页签：" + key)
+    message.info('Hi,您选择了页签：' + key)
   }
 
-  componentWillMount () {
+  componentWillMount() {
     const panes = [
       {
         title: 'Tab 1',
         content: 'Tab 1',
-        key: '1'
+        key: '1',
       },
       {
         title: 'Tab 2',
         content: 'Tab 2',
-        key: '2'
+        key: '2',
       },
       {
         title: 'Tab 3',
         content: 'Tab 3',
-        key: '3'
-      }
+        key: '3',
+      },
     ]
     this.setState({
       activeKey: panes[0].key,
-      panes
+      panes,
     })
   }
 
   onChange = (activeKey) => {
     this.setState({
-      activeKey
+      activeKey,
     })
   }
 
   onEdit = (targetKey, action) => {
-    this[action](targetKey);
+    this[action](targetKey)
   }
 
   add = () => {
-    const panes = this.state.panes;
-    const activeKey = `newTab${this.newTabIndex++}`;
-    panes.push({ title: activeKey, content: 'New Tab Pane', key: activeKey });
-    this.setState({ panes, activeKey });
+    const panes = this.state.panes
+    const activeKey = `newTab${this.newTabIndex++}`
+    panes.push({ title: activeKey, content: 'New Tab Pane', key: activeKey })
+    this.setState({ panes, activeKey })
   }
   remove = (targetKey) => {
-    let activeKey = this.state.activeKey;
-    let lastIndex;
+    let activeKey = this.state.activeKey
+    let lastIndex
     this.state.panes.forEach((pane, i) => {
       if (pane.key === targetKey) {
-        lastIndex = i - 1;
+        lastIndex = i - 1
       }
-    });
-    const panes = this.state.panes.filter(pane => pane.key !== targetKey);
+    })
+    const panes = this.state.panes.filter((pane) => pane.key !== targetKey)
     if (lastIndex >= 0 && activeKey === targetKey) {
-      activeKey = panes[lastIndex].key;
+      activeKey = panes[lastIndex].key
     }
-    this.setState({ panes, activeKey });
+    this.setState({ panes, activeKey })
   }
 
-  render () {
+  render() {
     return (
       <div>
         <Card title="Tab页签" className={style.card_wrap}>
           <Tabs defaultActiveKey="1" onChange={this.handleCallback}>
-            <TabPane tab="Tab 1" key="1">欢迎学习React课程</TabPane>
-            <TabPane tab="Tab 2" key="2" disabled>欢迎学习React课程</TabPane>
-            <TabPane tab="Tab 3" key="3">React是一个非常受欢迎的MV*框架</TabPane>
+            <TabPane tab="Tab 1" key="1">
+              欢迎学习React课程
+            </TabPane>
+            <TabPane tab="Tab 2" key="2" disabled>
+              欢迎学习React课程
+            </TabPane>
+            <TabPane tab="Tab 3" key="3">
+              React是一个非常受欢迎的MV*框架
+            </TabPane>
           </Tabs>
         </Card>
         <Card title="Tab带图的页签" className={style.card_wrap}>
           <Tabs defaultActiveKey="1" onChange={this.handleCallback}>
-            <TabPane tab={<span><Icon type="plus" />Tab 1</span>} key="1">欢迎学习React课程</TabPane>
-            <TabPane tab={<span><Icon type="edit" />Tab 2</span>} key="2">欢迎学习React课程</TabPane>
-            <TabPane tab={<span><Icon type="delete" />Tab 3</span>} key="3">React是一个非常受欢迎的MV*框架</TabPane>
+            <TabPane
+              tab={
+                <span>
+                  <Icon type="plus" />
+                  Tab 1
+                </span>
+              }
+              key="1"
+            >
+              欢迎学习React课程
+            </TabPane>
+            <TabPane
+              tab={
+                <span>
+                  <Icon type="edit" />
+                  Tab 2
+                </span>
+              }
+              key="2"
+            >
+              欢迎学习React课程
+            </TabPane>
+            <TabPane
+              tab={
+                <span>
+                  <Icon type="delete" />
+                  Tab 3
+                </span>
+              }
+              key="3"
+            >
+              React是一个非常受欢迎的MV*框架
+            </TabPane>
           </Tabs>
         </Card>
         <Card title="Tab带图的页签" className={style.card_wrap}>
@@ -88,18 +123,12 @@ export default class Buttons extends React.Component {
             type="editable-card"
             onEdit={this.onEdit}
           >
-            {
-              this.state.panes.map((panel) => {
-                return <TabPane
-                  tab={panel.title}
-                  key={panel.key}
-
-                />
-              })
-            }
+            {this.state.panes.map((panel) => {
+              return <TabPane tab={panel.title} key={panel.key} />
+            })}
           </Tabs>
         </Card>
       </div>
-    );
+    )
   }
 }
