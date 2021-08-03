@@ -1,10 +1,13 @@
 import React from 'react';
 import { Card, Table, Modal, Button, message } from 'antd';
 import axios from './../../axios';
-// import Utils from './../../utils/utils';
+import Utils from './../../utils/utils';
 
 export default class BasicTable extends React.Component {
   state = { dataSource2: [] }
+  params = {
+    page: 1
+  }
   componentDidMount () {
     const data = [
       {
@@ -46,22 +49,29 @@ export default class BasicTable extends React.Component {
   }
   // 动态获取mock数据
   request = () => {
+    let _this = this
     axios.ajax({
       url: '/table/list',
       data: {
         params: {
-          page: 1
+          page: this.params.page
         },
-        isShowLoading: true
       }
     }).then((res) => {
-      if (res.code == '0') {
-        res.result.map((item, index) => {
+      if (res.code == 0) {
+        res.result.list.map((item, index) => {
           item.key = index
         })
         this.setState({
-          dataSource2: res.result
+          dataSource2: res.result.list,
+          selectedRowKeys: [],
+          selectedRows: null,
+          pagenation: Utils.pagination(res, (current) => {
+            _this.params.page = current
+            this.request()
+          })
         })
+
       }
     })
   }
@@ -223,6 +233,14 @@ export default class BasicTable extends React.Component {
             columns={columns}
             dataSource={this.state.dataSource2}
             pagination={false}
+          />
+        </Card>
+        <Card title="Mock-表格分页" style={{ margin: '10px 0' }}>
+          <Table
+            bordered
+            columns={columns}
+            dataSource={this.state.dataSource2}
+            pagination={this.state.pagination}
           />
         </Card>
       </div>

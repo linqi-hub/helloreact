@@ -14,6 +14,7 @@ import Carousel from './pages/ui/carousel'
 import FormLogin from './pages/form/login'
 import FormRegister from './pages/form/register'
 import BasicTable from './pages/table/basicTable'
+import City from './pages/city/index'
 // import NoMatch from './pages/nomatch'
 
 export default class IRouter extends Component {
@@ -42,6 +43,8 @@ export default class IRouter extends Component {
                     <Route path="/form/reg" component={FormRegister} />
 
                     <Route path="/table/basic" component={BasicTable} />
+
+                    <Route path="/city" component={City} />
                   </Switch>
                 </Admin>
               )}
