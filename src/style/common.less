@@ -18,3 +18,45 @@
     display: block; // 新版antd和老版ant-row样式不一致，需要加上这句
   }
 }
+.content_wrap {
+  background: #ffffff;
+  border: 1px solid #e8e8e8;
+  margin-top: -3px;
+  .ant-table-wrapper {
+    margin-left: -1px;
+    margin-right: -2px;
+  }
+}
+
+//style->common.less
+ul,
+li {
+  list-style: none;
+}
+.clearfix {
+  &::after {
+    content: '';
+    clear: both;
+    display: block;
+    visibility: hidden;
+  }
+}
+.content {
+  padding: 20px;
+}
+
+//components->header->index.less
+//.common 页面简单头
+.simple_page {
+  .header_top {
+    background: #1890ff;
+    color: #ffffff;
+  }
+  .ant-form,
+  .ant-col-12,
+  .weather {
+    display: none;
+  }
+}
+
+//引入pages->order->detail.less

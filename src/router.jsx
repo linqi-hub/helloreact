@@ -3,6 +3,7 @@ import { HashRouter, Route, Switch } from 'react-router-dom'
 import App from './App'
 import Admin from './admin'
 import Login from './pages/login'
+import Home from './pages/home'
 import Buttons from './pages/ui/buttons'
 import Modals from './pages/ui/modals'
 import Loadings from './pages/ui/loadings'
@@ -15,6 +16,9 @@ import FormLogin from './pages/form/login'
 import FormRegister from './pages/form/register'
 import BasicTable from './pages/table/basicTable'
 import City from './pages/city/index'
+import Order from './pages/order/index'
+import OrderDetail from './pages/order/detail'
+import Common from './common'
 // import NoMatch from './pages/nomatch'
 
 export default class IRouter extends Component {
@@ -29,7 +33,7 @@ export default class IRouter extends Component {
               render={() => (
                 <Admin>
                   <Switch>
-                    {/* <Route path="/home" component={Home} /> */}
+                    <Route path="/home" component={Home} />
                     <Route path="/ui/buttons" component={Buttons} />
                     <Route path="/ui/modals" component={Modals} />
                     <Route path="/ui/loadings" component={Loadings} />
@@ -45,8 +49,20 @@ export default class IRouter extends Component {
                     <Route path="/table/basic" component={BasicTable} />
 
                     <Route path="/city" component={City} />
+                    <Route path="/order" component={Order} />
                   </Switch>
                 </Admin>
+              )}
+            />
+            <Route
+              path="/common"
+              render={() => (
+                <Common>
+                  <Route
+                    path="/common/order/detail/:orderId"
+                    component={OrderDetail}
+                  />
+                </Common>
               )}
             />
             <Route path="/order/detail" component={Login} />

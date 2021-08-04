@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Row, Col } from 'antd'
 import style from './index.less'
+
 import Util from '../../utils/utils'
 import axios from '../../axios'
 
@@ -39,24 +40,38 @@ export default class index extends Component {
       })
   }
   render() {
+    const menuType = this.props.menuType
     return (
       <div className={style.header}>
         <Row className={style.header_top}>
+          {menuType ? (
+            <Col span="6" className="logo">
+              <img src="/assets/logo-ant.svg" alt="" />
+              <span>LJQ 通用管理系统</span>
+            </Col>
+          ) : (
+            ''
+          )}
+
           <Col span={24}>
             <span>欢迎，{this.state.userName}</span>
             <a href="#">退出</a>
           </Col>
         </Row>
-        <Row className={style.breadcrumb}>
-          <Col span={4} className={style.breadcrumb_title}>
-            首页
-          </Col>
-          <Col span={20} className={style.weather}>
-            <span className={style.date}>{this.state.sysTime}</span>
+        {menuType ? (
+          ''
+        ) : (
+          <Row className={style.breadcrumb}>
+            <Col span={4} className={style.breadcrumb_title}>
+              首页
+            </Col>
+            <Col span={20} className={style.weather}>
+              <span className={style.date}>{this.state.sysTime}</span>
 
-            <span className={style.weather_detail}>{this.state.weather}</span>
-          </Col>
-        </Row>
+              <span className={style.weather_detail}>{this.state.weather}</span>
+            </Col>
+          </Row>
+        )}
       </div>
     )
   }
